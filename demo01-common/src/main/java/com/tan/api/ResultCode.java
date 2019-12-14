@@ -1,4 +1,4 @@
-package com.tan.common.api;
+package com.tan.api;
 
 /**
  * 枚举了一些常用API操作码

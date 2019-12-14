@@ -1,4 +1,4 @@
-package com.tan.common.api;
+package com.tan.api;
 
 /**
  * 通用返回对象

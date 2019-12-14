@@ -1,4 +1,4 @@
-package com.tan.common.api;
+package com.tan.api;
 
 /**
  * 封装API的错误码

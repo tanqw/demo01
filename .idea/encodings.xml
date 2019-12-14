@@ -3,8 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo01-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo01-admin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo01-common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/demo01-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo01-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/demo01-mbg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo01-mbg/src/main/java" charset="UTF-8" />
   </component>
 </project>

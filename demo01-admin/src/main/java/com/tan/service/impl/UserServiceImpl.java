@@ -53,7 +53,6 @@ public class UserServiceImpl extends ServiceImpl<UsersMapper, UsersEntity> imple
     public String login(UserParams userParams) {
         String token = null;
         UsersEntity usersEntities = usersMapper.getUserRoleRelation(userParams.getAccount());
-        logger.info("判断密码为" + md5Util.Check(userParams.getPassword(), usersEntities.getPassword()));
         if (!md5Util.Check(userParams.getPassword(), usersEntities.getPassword())) {
             return null;
         }

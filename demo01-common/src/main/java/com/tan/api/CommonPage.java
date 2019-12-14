@@ -1,4 +1,4 @@
-package com.tan.common.api;
+package com.tan.api;
 
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;
