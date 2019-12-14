@@ -11,15 +11,21 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <modules>
+        <module>demo01-admin</module>
+        <module>demo01-common</module>
+        <module>demo01-mbg</module>
+    </modules>
+
     <groupId>com.tan</groupId>
     <artifactId>demo01</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -45,13 +51,5 @@
             <version>1.2.10</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.6.1</version>
-        </dependency>
     </dependencies>
-
-
 </project>
