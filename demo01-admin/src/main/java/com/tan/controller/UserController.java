@@ -1,6 +1,6 @@
 package com.tan.controller;
 
-import com.tan.common.api.CommonResult;
+import com.tan.api.CommonResult;
 import com.tan.dto.UserParams;
 import com.tan.entity.UsersEntity;
 import com.tan.service.impl.UserServiceImpl;
@@ -41,5 +41,9 @@ public class UserController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         return CommonResult.success(tokenMap);
+    }
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public String test(){
+        return "Hello World";
     }
 }

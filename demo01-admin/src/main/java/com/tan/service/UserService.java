@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tan.dto.UserParams;
 import com.tan.entity.UsersEntity;
 
+import java.util.List;
+
 public interface UserService extends IService<UsersEntity> {
     /**
      * 注册
@@ -28,4 +30,12 @@ public interface UserService extends IService<UsersEntity> {
      * @return
      */
     String login(UserParams userParams);
+
+    /**
+     * 获取权限
+     *
+     * @param id
+     * @return
+     */
+    List<UsersEntity> getPermissionList(Integer id);
 }

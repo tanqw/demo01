@@ -15,8 +15,12 @@
         id,name,age,sex,account,status
     </sql>
 
-    <select id="getUserRoleRelation" resultMap="com.tan.mapper.UsersMapper.BaseResultMap">
+    <select id="getUserRoleRelation" resultMap="BaseResultMap">
         SELECT * FROM account WHERE account=#{account}
+    </select>
+
+    <select id="getPermissionList" resultMap="BaseResultMap">
+        SELECT * FROM account WHERE id=#{id}
     </select>
 
 </mapper>

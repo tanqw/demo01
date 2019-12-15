@@ -6,12 +6,21 @@ import com.tan.dto.UserParams;
 import com.tan.entity.UsersEntity;
 import com.tan.mapper.UsersMapper;
 import com.tan.service.UserService;
+import com.tan.utils.JwtTokenUtil;
 import com.tan.utils.MD5Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -20,7 +29,11 @@ public class UserServiceImpl extends ServiceImpl<UsersMapper, UsersEntity> imple
     @Autowired
     private UsersMapper usersMapper;
     @Autowired
-    MD5Util md5Util;
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    UserDetailsService userDetailsService;
 
     public UsersEntity register(UserParams userParams) {
         UsersEntity usersEntity = new UsersEntity();
@@ -28,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UsersMapper, UsersEntity> imple
             return null;
         }
         BeanUtils.copyProperties(userParams, usersEntity);
-        String password = md5Util.setPwd(usersEntity.getPassword());
+        String password=passwordEncoder.encode(usersEntity.getPassword());
         usersEntity.setPassword(password);
         usersEntity.setAge(19);
         usersEntity.setName("tan");
@@ -52,11 +65,18 @@ public class UserServiceImpl extends ServiceImpl<UsersMapper, UsersEntity> imple
     @Override
     public String login(UserParams userParams) {
         String token = null;
-        UsersEntity usersEntities = usersMapper.getUserRoleRelation(userParams.getAccount());
-        if (!md5Util.Check(userParams.getPassword(), usersEntities.getPassword())) {
-            return null;
+        UserDetails userDetails=userDetailsService.loadUserByUsername(userParams.getAccount());
+        if (!passwordEncoder.matches(userParams.getPassword(),userDetails.getPassword())){
+            throw new BadCredentialsException("密码不正确");
         }
-        token = "success";
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        token = jwtTokenUtil.generateToken(userDetails);
         return token;
+    }
+
+    @Override
+    public List<UsersEntity> getPermissionList(Integer id) {
+        return usersMapper.getPermissionList(id);
     }
 }
