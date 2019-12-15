@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @Author chengcheng
+ * @Author tan
  * @Date 2019/12/6 9:43
  * @Description ：UserDetails
  * @Version 1.0
@@ -26,23 +26,31 @@ public class UsersDetails implements UserDetails {
     }
 
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return permissionEntity.stream().filter(permission -> permission.getName()!=null)
-                .map(permission->new SimpleGrantedAuthority(permission.getName()))
+        return permissionEntity.stream().filter(permission -> permission.getName() != null)
+                .map(permission -> new SimpleGrantedAuthority(permission.getName()))
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 返回密码
+     *
+     * @return
+     */
     @Override
     public String getPassword() {
         return usersEntity.getPassword();
     }
 
+    /**
+     * 返回账号
+     *
+     * @return
+     */
     @Override
     public String getUsername() {
-        return usersEntity.getName();
+        return usersEntity.getAccount();
     }
 
     @Override

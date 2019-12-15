@@ -27,7 +27,7 @@ import java.util.List;
 
 
 /**
- * @Author chengcheng
+ * @Author tan
  * @Date 2019/12/5 21:12
  * @Description ：Security安全配置
  * @Version 1.0
@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception{
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf()
                 .disable()
                 .sessionManagement()
@@ -70,8 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**",
                         "/webjars/springfox-swagger-ui/**")
                 .permitAll()
-                .antMatchers("/user/login","/user/register")
+                .antMatchers("/login", "/register")
                 .permitAll()
+                //设置所有接口都不需要验证
                 .antMatchers("/**")//测试时全部运行访问
                 .permitAll()
                 .anyRequest()// 除上面外的所有请求全部需要鉴权认证
@@ -87,12 +88,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManager) throws Exception{
+    protected void configure(AuthenticationManagerBuilder authenticationManager) throws Exception {
         authenticationManager.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter(){
+    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter();
     }
 
@@ -110,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             UsersEntity usersEntity = usersService.findUserByUserName(username);
             if (usersEntity != null) {
                 List<UsersEntity> permissionList = usersService.getPermissionList(usersEntity.getId());
-                return new UsersDetails(usersEntity,permissionList);
+                return new UsersDetails(usersEntity, permissionList);
             }
             throw new UsernameNotFoundException("用户名或密码错误");
         };

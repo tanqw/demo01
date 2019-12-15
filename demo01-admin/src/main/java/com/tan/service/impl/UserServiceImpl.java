@@ -25,7 +25,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UsersMapper, UsersEntity> implements UserService {
-    private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UsersMapper usersMapper;
     @Autowired
