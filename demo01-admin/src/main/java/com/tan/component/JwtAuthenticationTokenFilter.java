@@ -54,4 +54,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
+
+    public String account(HttpServletRequest request){
+        String authHeader = request.getHeader(this.tokenHeader);
+        String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer"
+        String username = jwtTokenUtil.getUserNameFromToken(authToken);
+        return username;
+    }
 }

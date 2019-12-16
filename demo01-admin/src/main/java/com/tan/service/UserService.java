@@ -1,6 +1,7 @@
 package com.tan.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tan.dao.AlterUsersParams;
 import com.tan.dto.UserParams;
 import com.tan.entity.UsersEntity;
 
@@ -38,4 +39,12 @@ public interface UserService extends IService<UsersEntity> {
      * @return
      */
     List<UsersEntity> getPermissionList(Integer id);
+
+    /**
+     * 修改密码
+     *
+     * @param alterUsersParams
+     * @return
+     */
+    int alterPassword(AlterUsersParams alterUsersParams);
 }

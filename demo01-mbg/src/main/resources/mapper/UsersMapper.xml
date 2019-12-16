@@ -23,4 +23,8 @@
         SELECT * FROM account WHERE id=#{id}
     </select>
 
+    <update id="alterPassword" parameterType="com.tan.dao.AlterUsersParams">
+        UPDATE account SET password=#{password} WHERE account=#{account}
+    </update>
+
 </mapper>
